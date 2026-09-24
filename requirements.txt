@@ -1,0 +1,24 @@
+# Runtime and test dependencies for the e-commerce database project.
+# Pinned to recent stable versions compatible with Python 3.9+.
+
+# Data generation and CSV I/O
+pandas==2.2.3
+
+# PostgreSQL driver (connection + loading)
+psycopg2-binary==2.9.10
+
+# Read connection parameters from a gitignored .env file
+python-dotenv==1.0.1
+
+# Property-based testing
+hypothesis==6.112.2
+
+# Test runner
+pytest==8.3.4
+
+# Analysis dashboard (EDA visualization)
+dash==2.18.2
+plotly==5.24.1
+
+# SQL engine for pandas read_sql against RDS
+SQLAlchemy==2.0.36

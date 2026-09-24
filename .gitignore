@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Credentials (never commit real connection parameters)
+.env
+
+# Generated CSV output (keep the directory, ignore the data files)
+/data/*.csv

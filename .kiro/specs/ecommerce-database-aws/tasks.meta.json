@@ -1,0 +1,407 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Set up project scaffolding and dependencies": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429221
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219438472
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219640358
+      }
+    ],
+    "2.1 Add refined constraints to `schema.sql`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429288
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219439942
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219641341
+      }
+    ],
+    "3.1 Create the generator entry point and supporting models in `generate_data.py`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429345
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219441314
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219642707
+      }
+    ],
+    "4.1 Implement `build_categories` and `build_customers`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429378
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219648980
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790253954915
+      }
+    ],
+    "4.2 Implement `build_products`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429410
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790253960629
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254040728
+      }
+    ],
+    "4.3 Implement `build_orders` with the 12-month distribution algorithm": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429442
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254057819
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254622318
+      }
+    ],
+    "4.4 Implement `build_order_details` with unit_price snapshotting": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429489
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254627337
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254712929
+      }
+    ],
+    "5.1 Implement `validate_referential_integrity(tables)`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429527
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254717259
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254789242
+      }
+    ],
+    "6.1 Implement `write_csvs(tables, output_dir)`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429558
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254793370
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254902103
+      }
+    ],
+    "7.1 Implement `inject_defects(rng, tables) -> DefectSummary`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429586
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254906522
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255058239
+      }
+    ],
+    "8.1 Compose `generate()` end-to-end": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429636
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255062250
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255583253
+      }
+    ],
+    "9. Checkpoint - Ensure all generator tests pass": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429675
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255588909
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255599509
+      }
+    ],
+    "10.1 Implement `db/connection.py`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429709
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219649869
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790253956121
+      }
+    ],
+    "10.2 Add `.env.example` template and `.gitignore` entry": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429748
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219442098
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219643756
+      }
+    ],
+    "11.1 Implement `load_data.py`": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429776
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255603464
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255788778
+      }
+    ],
+    "12. Checkpoint - Ensure connection and loader tests pass": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429809
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255793091
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255798287
+      }
+    ],
+    "13.1 Update `README.md` with the full reproduce flow": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429845
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255802708
+      },
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255926772
+      }
+    ],
+    "14.1 Provision the RDS PostgreSQL instance and apply the schema (AWS-dependent)": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429876
+      },
+      {
+        "executionId": "d435f870-a12f-4c6a-8c18-0737aa2f4083",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790259487792
+      }
+    ],
+    "15. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219429908
+      },
+      {
+        "executionId": "d435f870-a12f-4c6a-8c18-0737aa2f4083",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790259565036
+      },
+      {
+        "executionId": "d435f870-a12f-4c6a-8c18-0737aa2f4083",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790259571795
+      }
+    ],
+    "2. Extend the database schema with integrity constraints": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219641408
+      }
+    ],
+    "3. Implement generator scaffolding and data models": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790219642774
+      }
+    ],
+    "10. Implement the repository-to-database connection layer": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790253956169
+      }
+    ],
+    "4. Implement deterministic table builders": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254712976
+      }
+    ],
+    "5. Implement referential-integrity validation": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254789281
+      }
+    ],
+    "6. Implement CSV export": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790254902161
+      }
+    ],
+    "7. Implement intentional data-quality defect injection": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255058276
+      }
+    ],
+    "8. Wire the generator together and verify determinism": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255583304
+      }
+    ],
+    "11. Implement the data loader": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255788854
+      }
+    ],
+    "13. Update documentation for end-to-end reproduction": [
+      {
+        "executionId": "ee6050b4-6a18-4647-9900-8f5559ca0805",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790255926856
+      }
+    ],
+    "14. AWS RDS provisioning and integration": [
+      {
+        "executionId": "d435f870-a12f-4c6a-8c18-0737aa2f4083",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790259487852
+      }
+    ],
+    "14.2 Write AWS integration tests (AWS-dependent)": [
+      {
+        "executionId": "d435f870-a12f-4c6a-8c18-0737aa2f4083",
+        "chatSessionId": "sess_4864745e-0177-4aab-a750-273b4dbcb01f",
+        "timestamp": 1790259560788
+      }
+    ]
+  }
+}
