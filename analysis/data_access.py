@@ -127,3 +127,69 @@ def order_line_revenue(tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
     orders = tables["orders"][["order_id", "customer_id", "order_date", "status"]]
     details["revenue"] = details["quantity"] * details["unit_price"]
     return details.merge(orders, on="order_id", how="left")
+
+
+def enriched_lines(tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+    """Return a fully enriched, line-level fact table for interactive exploration.
+
+    Joins every order-detail line to its order, customer, product, and category
+    so a single DataFrame carries everything the dashboard's filters and charts
+    need: revenue, quantity, unit_price, order_date, month, status,
+    payment_method, customer name/city, product name, and category name.
+
+    NULL/blank ``status`` and ``payment_method`` (intentional defects) are
+    surfaced as the literal string ``"(unknown)"`` so they remain visible and
+    filterable rather than silently dropped.
+
+    Returns:
+        A DataFrame with one row per order-detail line and these columns:
+        order_detail_id, order_id, order_date, month, month_label, status,
+        payment_method, customer_id, customer_name, city, product_id,
+        product_name, category_id, category_name, quantity, unit_price, revenue.
+    """
+    details = tables["order_details"].copy()
+    details["revenue"] = details["quantity"] * details["unit_price"]
+
+    orders = tables["orders"][
+        ["order_id", "customer_id", "order_date", "status", "payment_method"]
+    ].copy()
+
+    customers = tables["customers"].copy()
+    customers["customer_name"] = (
+        customers["first_name"].astype("string").fillna("")
+        + " "
+        + customers["last_name"].astype("string").fillna("")
+    ).str.strip()
+    customers = customers[["customer_id", "customer_name", "city"]]
+
+    products = tables["products"][
+        ["product_id", "product_name", "category_id"]
+    ].copy()
+    categories = tables["categories"][["category_id", "category_name"]].copy()
+    products = products.merge(categories, on="category_id", how="left")
+
+    lines = (
+        details.merge(orders, on="order_id", how="left")
+        .merge(customers, on="customer_id", how="left")
+        .merge(products, on="product_id", how="left")
+    )
+
+    # Surface intentional defects (NULL/blank) as a visible, filterable label.
+    for col in ("status", "payment_method"):
+        lines[col] = (
+            lines[col].astype("string").str.strip().str.lower()
+        )
+        lines[col] = lines[col].replace({"": pd.NA}).fillna("(unknown)")
+
+    lines["city"] = lines["city"].astype("string").fillna("(unknown)")
+    lines["order_date"] = pd.to_datetime(lines["order_date"])
+    lines["month"] = lines["order_date"].dt.to_period("M").dt.to_timestamp()
+    lines["month_label"] = lines["month"].dt.strftime("%Y-%m")
+
+    cols = [
+        "order_detail_id", "order_id", "order_date", "month", "month_label",
+        "status", "payment_method", "customer_id", "customer_name", "city",
+        "product_id", "product_name", "category_id", "category_name",
+        "quantity", "unit_price", "revenue",
+    ]
+    return lines[cols]

@@ -9,8 +9,8 @@ Determinism (Requirement 2.7): every random draw flows from a single seeded
 ``random.Random`` instance created in :func:`generate`, so ordering is stable
 and repeated runs with the same seed produce byte-identical output.
 
-This module currently provides the entry point, supporting data models, and
-the ``GenerationError`` exception. The individual builders, defect injection,
+This module currently provides the entry point, supporting data models, and the
+``GenerationError`` exception. The individual builders, defect injection,
 referential-integrity validation, and CSV export are implemented in later
 tasks; their calls below are intentional stubs.
 """
@@ -125,6 +125,12 @@ PRODUCT_NAMES_BY_CATEGORY: Dict[str, List[str]] = {
 
 # Value pools for nullable order columns.
 ORDER_STATUSES = ["completed", "pending", "shipped", "cancelled", "returned"]
+
+# Weighted probabilities for each status (must sum to 1.0). A ~50 % completion
+# rate is realistic for a Colombian e-commerce operation and keeps the AOV
+# denominator large enough that a handful of high-ticket orders don't dominate.
+ORDER_STATUS_WEIGHTS = [0.50, 0.16, 0.18, 0.10, 0.06]
+
 PAYMENT_METHODS = ["credit_card", "debit_card", "cash", "bank_transfer", "pse"]
 
 
@@ -302,16 +308,51 @@ _ACCENT_MAP = {
 }
 
 
-# Price bounds (in COP) for randomly assigned product prices. Kept comfortably
-# within the DECIMAL(12,2) domain (0.00 .. 9,999,999,999.99) required by the
-# schema, and always non-negative (Requirement 1.11, 1.12).
-MIN_PRICE_COP = 5_000
-MAX_PRICE_COP = 4_000_000
+# Fixed realistic COP price for each product.
+PRODUCT_FIXED_PRICES_COP: Dict[str, float] = {
+    "Smartphone": 2_499_900,
+    "Laptop": 4_299_900,
+    "Wireless Headphones": 349_900,
+    "Bluetooth Speaker": 249_900,
+    "Smartwatch": 699_900,
+    "Tablet": 1_499_900,
+    "Coffee Maker": 299_900,
+    "Air Fryer": 399_900,
+    "Vacuum Cleaner": 649_900,
+    "Table Lamp": 129_900,
+    "Running Shoes": 349_900,
+    "Yoga Mat": 79_900,
+    "Dumbbell Set": 229_900,
+    "Bicycle Helmet": 199_900,
+    "Leather Wallet": 149_900,
+    "Sunglasses": 199_900,
+    "Backpack": 179_900,
+    "Phone Case": 49_900,
+}
 
 # Bounds for the (nullable) stock column. A valid, non-negative integer is
 # built here; defect injection may later NULL/perturb it (Requirement 4.x).
 MIN_STOCK = 0
 MAX_STOCK = 500
+
+
+def _fixed_price_for(product_name: str) -> float:
+    """Return the fixed COP price assigned to a product.
+
+    Numbered fallback names ("Yoga Mat 2") use the fixed price
+    of their base product.
+    """
+    if product_name in PRODUCT_FIXED_PRICES_COP:
+        return PRODUCT_FIXED_PRICES_COP[product_name]
+
+    # Numbered fallback names ("Yoga Mat 2") share the base product's price.
+    base_name = product_name.rsplit(" ", 1)[0]
+    if base_name in PRODUCT_FIXED_PRICES_COP:
+        return PRODUCT_FIXED_PRICES_COP[base_name]
+
+    raise GenerationError(
+        f"No fixed price configured for product {product_name!r}."
+    )
 
 
 def build_products(
@@ -371,9 +412,8 @@ def build_products(
             rng, category_name, used_names_by_category[category_id]
         )
 
-        # Non-negative price within the DECIMAL(12,2) domain, quantized to
-        # exactly 2 decimal places.
-        price = round(rng.uniform(MIN_PRICE_COP, MAX_PRICE_COP), 2)
+        # Use the fixed price assigned to the product.
+        price = _fixed_price_for(product_name)
         stock = rng.randint(MIN_STOCK, MAX_STOCK)
 
         products.append(
@@ -541,7 +581,7 @@ def build_orders(
         rng: The single seeded RNG threaded through generation.
         customers: The customer rows produced by :func:`build_customers`; each
             must expose ``customer_id`` and ``registration_date``.
-        generation_date: The reference "now" anchoring the date window.
+        generation_date: The reference "now" anchoring the window.
 
     Returns:
         A list of 100 dicts keyed by ``order_id``, ``customer_id``,
@@ -597,7 +637,7 @@ def build_orders(
                     "order_id": order_id,
                     "customer_id": customer["customer_id"],
                     "order_date": order_date,
-                    "status": rng.choice(ORDER_STATUSES),
+                    "status": rng.choices(ORDER_STATUSES, weights=ORDER_STATUS_WEIGHTS, k=1)[0],
                     "payment_method": rng.choice(PAYMENT_METHODS),
                 }
             )
@@ -610,11 +650,30 @@ def build_orders(
 # Order details
 # ---------------------------------------------------------------------------
 
-# Bounds for the (non-nullable) quantity column. A small, realistic per-line
-# quantity keeps aggregate revenue meaningful while staying strictly positive
-# and well within the CHECK (quantity >= 0) domain.
+# Quantity bounds per price tier. High-ticket items are almost never bought in
+# multiples of 4–5 units by a single customer; capping by price keeps per-order
+# totals realistic and prevents a single line (e.g. 5 × Laptop) from inflating
+# the AOV into the tens of millions.
 MIN_QUANTITY = 1
-MAX_QUANTITY = 5
+
+# Price thresholds (COP) that determine the per-line quantity cap.
+_QTY_CAP_HIGH_PRICE  = 1_000_000   # items above this: max 1 unit
+_QTY_CAP_MID_PRICE   = 300_000     # items 300k–1M:   max 2 units
+# items below 300k: max 3 units (MIN_QUANTITY still applies as the lower bound)
+
+
+def _max_quantity_for(unit_price: float) -> int:
+    """Return the maximum realistic quantity for a given unit price (COP).
+
+    High-ticket items (>1M) are capped at 1 unit per line; mid-range items
+    (300k–1M) at 2; affordable items (<300k) at 3. This prevents a single
+    line such as 5 × Laptop = 21.5M from dominating the AOV.
+    """
+    if unit_price > _QTY_CAP_HIGH_PRICE:
+        return 1
+    if unit_price > _QTY_CAP_MID_PRICE:
+        return 2
+    return 3
 
 
 def build_order_details(
@@ -678,15 +737,25 @@ def build_order_details(
     for _ in range(remaining):
         assigned_order_ids.append(rng.choice(order_ids))
 
+    # Pre-compute inverse-price weights so affordable items appear more often in
+    # line items, matching a realistic e-commerce transaction mix (more Phone
+    # Cases and Yoga Mats than Laptops). Weight = 1 / price, normalised so the
+    # list sums to 1.0 for rng.choices().
+    raw_weights = [1.0 / p["price"] for p in products]
+    total_w = sum(raw_weights)
+    product_weights = [w / total_w for w in raw_weights]
+
     order_details: List[Dict[str, Any]] = []
     for order_detail_id, order_id in enumerate(assigned_order_ids, start=1):
-        product = rng.choice(products)
-        quantity = rng.randint(MIN_QUANTITY, MAX_QUANTITY)
-
-        # Snapshot the price BY VALUE. round() produces a fresh float quantized
-        # to 2 decimals, so the stored unit_price is independent of the product
-        # row and any later mutation of product["price"] (Requirement 5.3).
+        product = rng.choices(products, weights=product_weights, k=1)[0]
+        # Snapshot the price first so the quantity cap can reference it.
         unit_price = round(product["price"], 2)
+        max_qty = _max_quantity_for(unit_price)
+        quantity = rng.randint(MIN_QUANTITY, max_qty)
+
+        # unit_price is already snapshotted by value above (before the quantity
+        # cap draw) so it is independent of any later mutation of product["price"]
+        # (Requirement 5.3).
 
         order_details.append(
             {
@@ -1059,7 +1128,7 @@ def write_csvs(
     Args:
         tables: Mapping of table name to its rows (list of column-keyed dicts).
             Must contain every name in :data:`TABLE_NAMES`.
-        output_dir: Directory to write the CSV files into. Defaults to
+        output_dir: Directory to write the five CSV files into. Defaults to
             ``"data"``.
 
     Returns:

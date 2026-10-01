@@ -15,3 +15,6 @@ env/
 
 # Generated CSV output (keep the directory, ignore the data files)
 /data/*.csv
+
+# Kiro session exports
+kiro-session-sess_a5325222-7a30-41b6-9457-c7794a08cd64.zip
